@@ -70,7 +70,7 @@ def get_retrievals(loader,df,annoy_index,corrnet_model,resnet_model):
         id = df._id.values
 
         full_id=df_test._id.values
-        full_text=df_test._id.values
+        full_text=df_test.combined_name_and_breadcrumbs.values
 
         for i,(image_emb, text_emb,_) in enumerate(loader):        
             print("Query")
