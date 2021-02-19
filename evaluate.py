@@ -96,7 +96,7 @@ def get_retrievals(loader,df,annoy_index,corrnet_model,resnet_model):
             if config['retrieval_type']=='txt2img':
 
                 query_vector=only_text_emb
-                retrieved_index = annoy_index.get_nns_by_vector(query_vector[0], 10)
+                retrieved_index = annoy_index.get_nns_by_vector(query_vector[0], 11)[1:]
 
             elif config['retrieval_type']=='img2txt': 
                 query_vector=only_image_emb   
