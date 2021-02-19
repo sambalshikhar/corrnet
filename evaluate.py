@@ -12,6 +12,7 @@ import random
 from annoy import AnnoyIndex
 import os
 import matplotlib.pyplot as plt
+%matplotlib inline
 
 from scipy.spatial.distance import cdist
 
@@ -76,6 +77,7 @@ def get_retrievals(loader,df,annoy_index,corrnet_model,resnet_model):
             p = np.array(testing_image_array[str(id[i])])
             plt.title(text[i])
             plt.imshow(p)
+            plt.show()
             print()
             
             corrnet_model.eval()
