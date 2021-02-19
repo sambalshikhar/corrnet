@@ -68,6 +68,9 @@ def get_retrievals(loader,df,annoy_index,corrnet_model,resnet_model):
         text = df.combined_name_and_breadcrumbs.values
         id = df._id.values
 
+        full_id=df_test._id.values
+        full_text=df_test._id.values
+
         for i,(image_emb, text_emb,_) in enumerate(loader):        
             print("Query")
             p = np.array(testing_image_array[str(id[i])])
@@ -104,12 +107,12 @@ def get_retrievals(loader,df,annoy_index,corrnet_model,resnet_model):
 
             print('retrieved_index:', retrieved_index)
 
-                for r_ix in retrieved_index:
-                    p = np.array(testing_image_array[str(id[r_ix])])
-                    plt.imshow(p)
-                    plt.title(text[r_ix])
-                    plt.show()
-                    print()  
+            for r_ix in retrieved_index:
+                p = np.array(testing_image_array[str(full_id[r_ix])])
+                plt.imshow(p)
+                plt.title(full_text[r_ix])
+                plt.show()
+                print()  
             print("******************")
 
 
