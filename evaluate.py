@@ -62,7 +62,7 @@ def create_emb_pool(corrnet_model,resnet_model,testLoader):
 
     return common_emb_pool,only_image_emb_pool,only_text_emb_pool
 
-def get_retrievals(loader,n_matches,df,annoy_index):
+def get_retrievals(loader,df,annoy_index):
         text = df.combined_name_and_breadcrumbs.values
         id = df._id.values
 
@@ -178,11 +178,17 @@ if __name__ == '__main__':
 
     test_df_eval = CustomDataset(retreival_df,testing_image_array,transformations,get_fasstext_vector,text_emb_size)
     retreival_loader = DataLoader(test_ds_eval, shuffle=False, batch_size=1, pin_memory = torch.cuda.is_available())
+    
+    annoy_index= AnnoyIndex(1024, 'angular')  
+    
+    if config['retrieval_type']=='txt2img':   
+        annoy_index.load("./annoy_indices/text.ann'")
+    elif config['retrieval_type']=='img2txt': 
+        annoy_index.load("./annoy_indices/image.ann'")
+    else
+        annoy_index.load("./annoy_indices/common.ann'")
 
-    annoy_index= AnnoyIndex(1024, 'angular')     
-    annoy_index.load
-
-    retreival_indexes=get_retrievals(retreival_loader,test_df_eval)
+    retreival_indexes=get_retrievals(retreival_loader,test_df_eval,annoy_index)
 
 
 
