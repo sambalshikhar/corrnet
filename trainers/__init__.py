@@ -141,4 +141,4 @@ def test_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch
             if batch % print_freq == 0: 
                 progress_of_test_batch.display(batch)
 
-    return val_r5_acc_img2txt.avg,val_r5_acc_txt2img.avg
+    return val_r5_acc_img2txt,val_r5_acc_txt2img

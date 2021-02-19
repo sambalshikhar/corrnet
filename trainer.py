@@ -112,13 +112,13 @@ if __name__ == '__main__':
 
     for epoch in range(0, n_epochs + 1):
         corrnet_model,resnet_model=train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq)
-        val_r5_acc_img2txt.avg,val_r5_acc_txt2img.avg=test_epoch(corrnet_model,testLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq)
+        val_r5_acc_img2txt,val_r5_acc_txt2img=test_epoch(corrnet_model,testLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq)
 
         if val_r5_acc_img2txt.avg>val_r5_acc_img2txt_best and val_r5_acc_txt2img.avg>val_r5_acc_txt2img_best:
             val_r5_acc_img2txt_best,val_r5_acc_txt2img_best=val_r5_acc_img2txt.avg,val_r5_acc_txt2img.avg
             if not os.path.isdir(train_config['source_dir']):
-                os.mkdir(train_config['source_dir'])
-            torch.save(corrnet_model.state_dict(),os.path.join(train_config['source_dir'],config['model_name']))
+                os.mkdir(config['source_dir'])
+            torch.save(corrnet_model.state_dict(),os.path.join(config['source_dir'],config['model_name']))
             print("YIPPEEE MODEL SAVED")
             print(f"{best_test_img2img} , {best_test_txt2txt} , {best_test_img2txt}")
 
