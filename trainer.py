@@ -24,7 +24,7 @@ from torch.utils.data import DataLoader
 def load_existing_data(source):
     copy_files_h5 = glob(source+"*.h5")
     copy_file = copy_files_h5 
-    _=[copyfile(x, '/content/{}'.format(x.split('/')[-1])) for x in copy_file] 
+    _=[copyfile(x, '/content/corrnet/{}'.format(x.split('/')[-1])) for x in copy_file] 
 
 
 if __name__ == '__main__':
