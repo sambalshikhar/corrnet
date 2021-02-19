@@ -23,5 +23,5 @@ config={
 "test_csv_path":"/content/nfs/machine-learning/myntra_dataset/test.csv",
 "hdf5_exists":True,
 "load_pretrained":False
-
+"evaluate_n_results":10,
 }
