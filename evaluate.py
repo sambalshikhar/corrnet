@@ -9,6 +9,8 @@ from torch.hub import load_state_dict_from_url
 from torchvision.models import resnet50
 import torch.nn.functional as F
 import random
+from annoy import AnnoyIndex
+import os
 
 from scipy.spatial.distance import cdist
 
@@ -29,7 +31,7 @@ def load_existing_data(source):
     _=[copyfile(x, '/content/corrnet/{}'.format(x.split('/')[-1])) for x in copy_file] 
 
 
-def create_emb_pool(corrnet_model,resnet_model,testLoader,):
+def create_emb_pool(corrnet_model,resnet_model,testLoader):
     common_emb_pool = []
     only_image_emb_pool = []
     only_text_emb_pool = []
@@ -60,32 +62,55 @@ def create_emb_pool(corrnet_model,resnet_model,testLoader,):
 
     return common_emb_pool,only_image_emb_pool,only_text_emb_pool
 
-def get_text2img_retrievals(corrnet_model,resnet_model,only_image_emb_pool,n_random_indices,text):
+def get_retrievals(loader,n_matches,df):
+        text = df.combined_name_and_breadcrumbs.values
+        id = df._id.values
+        for i,(image_emb, text_emb,_) in enumerate(testLoader):        
+            print("Query:"
+            p = np.array(testing_image_array[str(id[r_ix])])
+            plt.title(text[i])
+            plt.imshow(p)
+            print("******************")
+            
+            corrnet_model.eval()
+            resnet_model.eval()
+            with torch.no_grad():
+                resnet_out = resnet_model(image_emb)
+                common_emb, only_image_emb, only_text_emb, _, _, _ = corrnet_model(resnet_out, text_emb)
+                common_emb,only_image_emb,only_text_emb=F.normalize(common_emb, p=2, dim=1),F.normalize(only_image_emb, p=2, dim=1),F.normalize(only_text_emb, p=2, dim=1)
+            
+            retrieved_index = annoy.get_nns_by_vector(query_vector[0], 10)
+            print('retrieved_index:', retrieved_index)
 
-    for i in n_random_indices:
-        #query = 'brush geschirrbürste saisonale kollektion frühling brabantia brush geschirrbürste'
+def create_annoy_index(common_emb_pool,only_image_emb_pool,only_text_emb_pool):
+
+    annoy_common = AnnoyIndex(1024, 'angular') 
+    annoy_image = AnnoyIndex(1024, 'angular') 
+    annoy_text = AnnoyIndex(1024, 'angular') 
+
+    # index flair vectors
+
+    for ix in tqdm.notebook.tqdm(range(len(common_emb_pool))):
+
+        IT = common_emb_pool[ix]
+        I_ = only_image_emb_pool[ix]
+        _T = only_text_emb_pool[ix]
+
+        annoy_common.add_item(ix, IT)
+        annoy_image.add_item(ix, I_)
+        annoy_text.add_item(ix, _T)
         
-        print("Query:",text[i])
-        print()
-        # retrieve
-        query=text[i]
-        query_text_emb = torch.tensor(get_fasstext_vector(query)).unsqueeze(0).detach().cuda()
-        query_image_emb = torch.zeros((1, 2048)).cuda()
+    annoy_common.build(10) # 10 trees
+    annoy_image.build(10) # 10 trees
+    annoy_text.build(10) # 10 trees
 
-        #print(query_text_emb.shape, query_image_emb.shape)
-        corrnet_model.eval()
-        with torch.no_grad():
-            _, _,query_vector,_,_,_ = corrnet_model(query_image_emb,query_text_emb.cuda())
-            query_vector=F.normalize(query_vector, p=2, dim=1)
-            query_vector=query_vector.detach().cpu().numpy()
+    
 
-
-        distance_matrix = cdist(query_vector,only_image_emb_pool)
-        sorted_distance_matrix = np.argsort(distance_matrix)
-        print(sorted_distance_matrix[0])
-        retrieved_index =sorted_distance_matrix[0][:10]
-        print(retrieved_index)
-
+    if not os.isdir("./annoy_indices")
+        os.mkdir("./annoy_indices")
+        annoy_common.save('./annoy_indices/common.ann')
+        annoy_image.save('./annoy_indices/image.ann')
+        annoy_text.save('./annoy_indices/text.ann')
 
 
 if __name__ == '__main__':
@@ -128,18 +153,24 @@ if __name__ == '__main__':
     if torch.cuda.is_available():
         corrnet_model,resnet_model = corrnet_model.cuda(),resnet_model.cuda()
 
-
-    corrnet_model.eval()
-    resnet_model.eval()
-
     common_emb_pool,only_image_emb_pool,only_text_emb_pool=create_emb_pool(corrnet_model,resnet_model,testLoader)
 
-    text = df_test.combined_name_and_breadcrumbs.values
-    product_id = df_test._id.values
+    create_annoy_index(common_emb_pool,only_image_emb_pool,only_text_emb_pool)
 
-    id_x=[i for i in range(len(product_id))]
+    retreival_df=df_test.sample(config['evaluate_n_results'])
 
-    n_random_indices=random.sample(idx,config['evaluate_n_results'])
+    test_df_eval = CustomDataset(retreival_df,testing_image_array,transformations,get_fasstext_vector,text_emb_size)
+    retreival_loader = DataLoader(test_ds_eval, shuffle=False, batch_size=1, pin_memory = torch.cuda.is_available())
+
+    retreival_indexes=get_retrievals(retreival_loader,test_df_eval)
+
+
+
+
+
+
+
+
 
 
 

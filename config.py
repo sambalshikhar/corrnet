@@ -24,4 +24,5 @@ config={
 "hdf5_exists":True,
 "load_pretrained":False
 "evaluate_n_results":10,
+"top_n_matches":10
 }
