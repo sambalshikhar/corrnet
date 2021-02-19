@@ -110,7 +110,7 @@ def get_retrievals(loader,df,annoy_index,corrnet_model,resnet_model):
 
             for r_ix in retrieved_index:
                 p = np.array(testing_image_array[str(full_id[r_ix])])
-                print("Name:"full_text[r_ix])
+                print("Name:",full_text[r_ix])
                 plt.imshow(p)
                 plt.show()
                 print()  
