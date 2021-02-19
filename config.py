@@ -3,7 +3,7 @@ config={
 #Hyperparameters   
 "text_emb_size":300,
 "batch_size":100,    
-"train_hdf5_name":"myntra_trainin.h5",
+"train_hdf5_name":"myntra_training.h5",
 "test_hdf5_name":"myntra_testing.h5",
 "image_emb_size":2048,
 "text_emb_size":300,
