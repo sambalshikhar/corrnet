@@ -62,9 +62,10 @@ def create_emb_pool(corrnet_model,resnet_model,testLoader):
 
     return common_emb_pool,only_image_emb_pool,only_text_emb_pool
 
-def get_retrievals(loader,n_matches,df):
+def get_retrievals(loader,n_matches,df,annoy_index):
         text = df.combined_name_and_breadcrumbs.values
         id = df._id.values
+
         for i,(image_emb, text_emb,_) in enumerate(testLoader):        
             print("Query:"
             p = np.array(testing_image_array[str(id[r_ix])])
@@ -78,8 +79,24 @@ def get_retrievals(loader,n_matches,df):
                 resnet_out = resnet_model(image_emb)
                 common_emb, only_image_emb, only_text_emb, _, _, _ = corrnet_model(resnet_out, text_emb)
                 common_emb,only_image_emb,only_text_emb=F.normalize(common_emb, p=2, dim=1),F.normalize(only_image_emb, p=2, dim=1),F.normalize(only_text_emb, p=2, dim=1)
+
+            common_emb=common_emb.detach().cpu().numpy()
+            only_image_emb=only_image_emb.cpu().numpy()
+            only_text_emb=only_text_emb.cpu().numpy()
             
-            retrieved_index = annoy.get_nns_by_vector(query_vector[0], 10)
+            if config['retrieval_type']=='txt2img':
+
+                query_vector=only_text_emb
+                retrieved_index = annoy_index.get_nns_by_vector(query_vector[0], 10)
+
+            elif config['retrieval_type']=='img2txt': 
+                query_vector=only_image_emb   
+                retrieved_index = annoy_index.get_nns_by_vector(query_vector[0], 10)
+
+            else
+                query_vector=common_emb
+                retrieved_index = annoy_index.get_nns_by_vector(query_vector[0], 10)
+
             print('retrieved_index:', retrieved_index)
 
 def create_annoy_index(common_emb_pool,only_image_emb_pool,only_text_emb_pool):
@@ -152,15 +169,18 @@ if __name__ == '__main__':
 
     if torch.cuda.is_available():
         corrnet_model,resnet_model = corrnet_model.cuda(),resnet_model.cuda()
-
-    common_emb_pool,only_image_emb_pool,only_text_emb_pool=create_emb_pool(corrnet_model,resnet_model,testLoader)
-
-    create_annoy_index(common_emb_pool,only_image_emb_pool,only_text_emb_pool)
+    
+    if not os.isdir("./annoy_indices"):
+        common_emb_pool,only_image_emb_pool,only_text_emb_pool=create_emb_pool(corrnet_model,resnet_model,testLoader)
+        create_annoy_index(common_emb_pool,only_image_emb_pool,only_text_emb_pool)
 
     retreival_df=df_test.sample(config['evaluate_n_results'])
 
     test_df_eval = CustomDataset(retreival_df,testing_image_array,transformations,get_fasstext_vector,text_emb_size)
     retreival_loader = DataLoader(test_ds_eval, shuffle=False, batch_size=1, pin_memory = torch.cuda.is_available())
+
+    annoy_index= AnnoyIndex(1024, 'angular')     
+    annoy_index.load
 
     retreival_indexes=get_retrievals(retreival_loader,test_df_eval)
 
