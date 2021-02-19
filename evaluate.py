@@ -11,6 +11,7 @@ import torch.nn.functional as F
 import random
 from annoy import AnnoyIndex
 import os
+import matplotlib.pyplot as plt
 
 from scipy.spatial.distance import cdist
 
@@ -63,24 +64,26 @@ def create_emb_pool(corrnet_model,resnet_model,testLoader):
 
     return common_emb_pool,only_image_emb_pool,only_text_emb_pool
 
-def get_retrievals(loader,df,annoy_index):
+def get_retrievals(loader,df,annoy_index,corrnet_model,resnet_model):
         text = df.combined_name_and_breadcrumbs.values
         id = df._id.values
 
-        for i,(image_emb, text_emb,_) in enumerate(testLoader):        
+        for i,(image_emb, text_emb,_) in enumerate(loader):        
             print("Query")
-            p = np.array(testing_image_array[str(id[r_ix])])
+            p = np.array(testing_image_array[str(id[i])])
             plt.title(text[i])
             plt.imshow(p)
             print()
-            print("******************")
             
             corrnet_model.eval()
             resnet_model.eval()
             with torch.no_grad():
-                resnet_out = resnet_model(image_emb)
+                if torch.cuda.is_available():
+                    image_emb = image_emb.cuda()
+                    text_emb  = text_emb.cuda()
+                resnet_out = torch.unsqueeze(resnet_model(image_emb),0)
                 common_emb, only_image_emb, only_text_emb, _, _, _ = corrnet_model(resnet_out, text_emb)
-                common_emb,only_image_emb,only_text_emb=F.normalize(common_emb, p=2, dim=1),F.normalize(only_image_emb, p=2, dim=1),F.normalize(only_text_emb, p=2, dim=1)
+                common_emb,only_image_emb,only_text_emb=F.normalize(common_emb, p=2, dim=0),F.normalize(only_image_emb, p=2, dim=0),F.normalize(only_text_emb, p=2, dim=0)
 
             common_emb=common_emb.detach().cpu().numpy()
             only_image_emb=only_image_emb.cpu().numpy()
@@ -100,6 +103,15 @@ def get_retrievals(loader,df,annoy_index):
                 retrieved_index = annoy_index.get_nns_by_vector(query_vector[0], 10)
 
             print('retrieved_index:', retrieved_index)
+
+                for r_ix in retrieved_index:
+                    p = np.array(testing_image_array[str(id[r_ix])])
+                    plt.imshow(p)
+                    plt.title(text[r_ix])
+                    plt.show()
+                    print()  
+            print("******************")
+
 
 def create_annoy_index(common_emb_pool,only_image_emb_pool,only_text_emb_pool):
 
@@ -177,6 +189,7 @@ if __name__ == '__main__':
         create_annoy_index(common_emb_pool,only_image_emb_pool,only_text_emb_pool)
 
     retreival_df=df_test.sample(config['evaluate_n_results'])
+    print(retreival_df.shape)
 
     test_ds_eval = CustomDataset(retreival_df,testing_image_array,transformations,get_fasstext_vector,text_emb_size)
     retreival_loader = DataLoader(test_ds_eval, shuffle=False, batch_size=1, pin_memory = torch.cuda.is_available())
@@ -190,7 +203,7 @@ if __name__ == '__main__':
     else:
         annoy_index.load("./annoy_indices/common.ann")
 
-    retreival_indexes=get_retrievals(retreival_loader,retreival_df,annoy_index)
+    retreival_indexes=get_retrievals(retreival_loader,retreival_df,annoy_index,corrnet_model,resnet_model)
 
 
 

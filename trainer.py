@@ -86,7 +86,7 @@ if __name__ == '__main__':
 
     corrnet_model = Corrnet_Model(image_emb_size,text_emb_size,middle_emb_size,loss_function)
     if config['load_pretrained']:
-        corrnet_model.load_state_dict(torch.load(os.path.join(train_config['source_dir'],config['model_name'])))
+        corrnet_model.load_state_dict(torch.load(os.path.join(config['source_dir'],config['model_name'])))
 
     resnet_model = Resnet50()
     cosine_sim = nn.CosineSimilarity(dim=1, eps=1e-6)
