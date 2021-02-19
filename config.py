@@ -21,9 +21,9 @@ config={
 "source_dir":"/content/nfs/machine-learning/myntra_dataset/",
 "train_csv_path":"/content/nfs/machine-learning/myntra_dataset/train.csv",
 "test_csv_path":"/content/nfs/machine-learning/myntra_dataset/test.csv",
-"model_name":"clip_demo"
+"model_name":"clip_demo.pth",
 "hdf5_exists":True,
-"load_pretrained":False
+"load_pretrained":True,
+'retrieval_type':"txt2img",
 "evaluate_n_results":10,
-"top_n_matches":10,
 }

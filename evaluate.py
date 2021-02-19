@@ -21,6 +21,7 @@ from utils.embed_utils import *
 from utils.trainer_utils import *
 from trainers import *
 from trainers.losses import *
+from tqdm.notebook import tqdm
 
 from config import config
 
@@ -36,7 +37,7 @@ def create_emb_pool(corrnet_model,resnet_model,testLoader):
     only_image_emb_pool = []
     only_text_emb_pool = []
     with torch.no_grad():
-        for (image_emb, text_emb,_) in tqdm.notebook.tqdm(testLoader):
+        for (image_emb, text_emb,_) in tqdm(testLoader):
             if torch.cuda.is_available():
                 image_emb = image_emb.cuda()
                 text_emb  = text_emb.cuda()
@@ -67,10 +68,11 @@ def get_retrievals(loader,df,annoy_index):
         id = df._id.values
 
         for i,(image_emb, text_emb,_) in enumerate(testLoader):        
-            print("Query:"
+            print("Query")
             p = np.array(testing_image_array[str(id[r_ix])])
             plt.title(text[i])
             plt.imshow(p)
+            print()
             print("******************")
             
             corrnet_model.eval()
@@ -93,7 +95,7 @@ def get_retrievals(loader,df,annoy_index):
                 query_vector=only_image_emb   
                 retrieved_index = annoy_index.get_nns_by_vector(query_vector[0], 10)
 
-            else
+            else:
                 query_vector=common_emb
                 retrieved_index = annoy_index.get_nns_by_vector(query_vector[0], 10)
 
@@ -123,7 +125,7 @@ def create_annoy_index(common_emb_pool,only_image_emb_pool,only_text_emb_pool):
 
     
 
-    if not os.isdir("./annoy_indices")
+    if not os.path.isdir("./annoy_indices"):
         os.mkdir("./annoy_indices")
         annoy_common.save('./annoy_indices/common.ann')
         annoy_image.save('./annoy_indices/image.ann')
@@ -145,9 +147,9 @@ if __name__ == '__main__':
     get_fasstext_vector = Fasttext(fasttext_model)
 
     text_emb_size = config['text_emb_size']
-    testing_image_array = h5py.File(train_config['test_hdf5_name'],'r')
+    testing_image_array = h5py.File(config['test_hdf5_name'],'r')
     test_ds = CustomDataset(df_test,testing_image_array,transformations,get_fasstext_vector,text_emb_size)
-    testLoader = DataLoader(test_ds, shuffle=False, batch_size=train_config['batch_size'], pin_memory = torch.cuda.is_available())
+    testLoader = DataLoader(test_ds, shuffle=False, batch_size=config['batch_size'], pin_memory = torch.cuda.is_available())
 
     image_emb_size = config['image_emb_size']
     text_emb_size = config['text_emb_size']
@@ -163,14 +165,14 @@ if __name__ == '__main__':
 
     corrnet_model = Corrnet_Model(image_emb_size,text_emb_size,middle_emb_size,loss_function)
     if config['load_pretrained']:
-        corrnet_model.load_state_dict(torch.load(os.path.join(train_config['source_dir'],config['model_name'])))
+        corrnet_model.load_state_dict(torch.load(os.path.join(config['source_dir'],config['model_name'])))
 
     resnet_model = Resnet50()
 
     if torch.cuda.is_available():
         corrnet_model,resnet_model = corrnet_model.cuda(),resnet_model.cuda()
     
-    if not os.isdir("./annoy_indices"):
+    if not os.path.isdir("./annoy_indices"):
         common_emb_pool,only_image_emb_pool,only_text_emb_pool=create_emb_pool(corrnet_model,resnet_model,testLoader)
         create_annoy_index(common_emb_pool,only_image_emb_pool,only_text_emb_pool)
 
@@ -180,12 +182,12 @@ if __name__ == '__main__':
     retreival_loader = DataLoader(test_ds_eval, shuffle=False, batch_size=1, pin_memory = torch.cuda.is_available())
     
     annoy_index= AnnoyIndex(1024, 'angular')  
-    
+
     if config['retrieval_type']=='txt2img':   
         annoy_index.load("./annoy_indices/text.ann'")
     elif config['retrieval_type']=='img2txt': 
         annoy_index.load("./annoy_indices/image.ann'")
-    else
+    else:
         annoy_index.load("./annoy_indices/common.ann'")
 
     retreival_indexes=get_retrievals(retreival_loader,test_df_eval,annoy_index)
