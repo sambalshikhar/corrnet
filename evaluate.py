@@ -12,7 +12,7 @@ import random
 from annoy import AnnoyIndex
 import os
 import matplotlib.pyplot as plt
-%matplotlib inline
+#%matplotlib inline
 
 from scipy.spatial.distance import cdist
 
