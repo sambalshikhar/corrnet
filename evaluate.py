@@ -75,10 +75,9 @@ def get_retrievals(loader,df,annoy_index,corrnet_model,resnet_model):
         for i,(image_emb, text_emb,_) in enumerate(loader):        
             print("Query")
             p = np.array(testing_image_array[str(id[i])])
-            plt.title(text[i])
             plt.imshow(p)
+            plt.title(text[i])
             plt.show()
-            print()
             
             corrnet_model.eval()
             resnet_model.eval()
