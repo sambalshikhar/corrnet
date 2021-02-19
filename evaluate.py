@@ -12,6 +12,7 @@ import random
 from annoy import AnnoyIndex
 import os
 import matplotlib.pyplot as plt
+import argparse
 #%matplotlib inline
 
 from scipy.spatial.distance import cdist
@@ -100,11 +101,11 @@ def get_retrievals(loader,df,annoy_index,corrnet_model,resnet_model):
 
             elif config['retrieval_type']=='img2txt': 
                 query_vector=only_image_emb   
-                retrieved_index = annoy_index.get_nns_by_vector(query_vector[0], 10)
+                retrieved_index = annoy_index.get_nns_by_vector(query_vector[0], 11)[1:]
 
             else:
                 query_vector=common_emb
-                retrieved_index = annoy_index.get_nns_by_vector(query_vector[0], 10)
+                retrieved_index = annoy_index.get_nns_by_vector(query_vector[0], 10)[1:]
 
             print('retrieved_index:', retrieved_index)
 
@@ -150,6 +151,22 @@ def create_annoy_index(common_emb_pool,only_image_emb_pool,only_text_emb_pool):
 
 if __name__ == '__main__':
 
+    my_parser = argparse.ArgumentParser(description='Input list')
+
+    # Add the arguments
+    my_parser.add_argument('--retrieval_type',
+                       action='store',
+                       type=str,
+                       help='img2txt,txt2img or common',
+                       default='common')
+    my_parser.add_argument('--random_seed',
+                       action='store',
+                       type=int,
+                       help='rondomize results',
+                       default='common')      
+
+    args = my_parser.parse_args()                                
+
     df_test=pd.read_csv(config['test_csv_path'])
 
     transformations = transforms.Compose([torchvision.transforms.ToPILImage(mode="RGB"),
@@ -191,19 +208,17 @@ if __name__ == '__main__':
     if not os.path.isdir("./annoy_indices"):
         common_emb_pool,only_image_emb_pool,only_text_emb_pool=create_emb_pool(corrnet_model,resnet_model,testLoader)
         create_annoy_index(common_emb_pool,only_image_emb_pool,only_text_emb_pool)
-
-    retreival_df=df_test.sample(config['evaluate_n_results'])
-    print(retreival_df.shape)
-
+    
+    retreival_df=df_test.sample(config['evaluate_n_results'],random_state=args.random_seed)
     test_ds_eval = CustomDataset(retreival_df,testing_image_array,transformations,get_fasstext_vector,text_emb_size)
     retreival_loader = DataLoader(test_ds_eval, shuffle=False, batch_size=1, pin_memory = torch.cuda.is_available())
     
     annoy_index= AnnoyIndex(1024, 'angular')  
 
-    if config['retrieval_type']=='txt2img':   
+    if args.retrieval_type=='txt2img':   
         annoy_index.load("./annoy_indices/image.ann")
-    elif config['retrieval_type']=='img2txt': 
-        annoy_index.load("./annoy_indices/txt.ann")
+    elif args.retrieval_type=='img2txt': 
+        annoy_index.load("./annoy_indices/text.ann")
     else:
         annoy_index.load("./annoy_indices/common.ann")
 
