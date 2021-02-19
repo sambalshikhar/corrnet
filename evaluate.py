@@ -201,9 +201,9 @@ if __name__ == '__main__':
     annoy_index= AnnoyIndex(1024, 'angular')  
 
     if config['retrieval_type']=='txt2img':   
-        annoy_index.load("./annoy_indices/text.ann")
-    elif config['retrieval_type']=='img2txt': 
         annoy_index.load("./annoy_indices/image.ann")
+    elif config['retrieval_type']=='img2txt': 
+        annoy_index.load("./annoy_indices/txt.ann")
     else:
         annoy_index.load("./annoy_indices/common.ann")
 
