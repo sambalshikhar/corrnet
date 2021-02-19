@@ -16,6 +16,7 @@ config={
 "loss_function":"clip",
 "fasttext_path":"cc.en.300.bin",
 "optimizer":"adam",
+"scheduler":False,
 
 #Files and directories
 "source_dir":"/content/nfs/machine-learning/myntra_dataset/",

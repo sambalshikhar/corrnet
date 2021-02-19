@@ -111,7 +111,7 @@ if __name__ == '__main__':
 
 
     for epoch in range(0, n_epochs + 1):
-        corrnet_model,resnet_model=train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq)
+        corrnet_model,resnet_model=train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,my_lr_scheduler )
         val_r5_acc_img2txt,val_r5_acc_txt2img=test_epoch(corrnet_model,testLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq)
 
         if val_r5_acc_img2txt.avg>val_r5_acc_img2txt_best and val_r5_acc_txt2img.avg>val_r5_acc_txt2img_best:

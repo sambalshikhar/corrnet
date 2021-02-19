@@ -18,7 +18,7 @@ from torch.utils.data import DataLoader
 
 
 
-def train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq):
+def train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,my_lr_scheduler=None):
     batch_time = AverageMeter('Time', ':6.3f')
     data_time = AverageMeter('Data', ':6.3f')
 
@@ -44,6 +44,8 @@ def train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoc
     corrnet_model.train() 
     end = time.time()
 
+    if my_lr_scheduler!=None:
+        my_lr_scheduler.step()
     for batch,(image,text_emb,instance_labels) in enumerate(trainLoader):
         # zero the parameter gradients
         optimizer.zero_grad()
