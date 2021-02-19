@@ -107,9 +107,7 @@ def create_annoy_index(common_emb_pool,only_image_emb_pool,only_text_emb_pool):
     annoy_image = AnnoyIndex(1024, 'angular') 
     annoy_text = AnnoyIndex(1024, 'angular') 
 
-    # index flair vectors
-
-    for ix in tqdm.notebook.tqdm(range(len(common_emb_pool))):
+    for ix in tqdm(range(len(common_emb_pool))):
 
         IT = common_emb_pool[ix]
         I_ = only_image_emb_pool[ix]
@@ -130,6 +128,8 @@ def create_annoy_index(common_emb_pool,only_image_emb_pool,only_text_emb_pool):
         annoy_common.save('./annoy_indices/common.ann')
         annoy_image.save('./annoy_indices/image.ann')
         annoy_text.save('./annoy_indices/text.ann')
+
+    print("Annoy Indices created")    
 
 
 if __name__ == '__main__':
@@ -178,19 +178,19 @@ if __name__ == '__main__':
 
     retreival_df=df_test.sample(config['evaluate_n_results'])
 
-    test_df_eval = CustomDataset(retreival_df,testing_image_array,transformations,get_fasstext_vector,text_emb_size)
+    test_ds_eval = CustomDataset(retreival_df,testing_image_array,transformations,get_fasstext_vector,text_emb_size)
     retreival_loader = DataLoader(test_ds_eval, shuffle=False, batch_size=1, pin_memory = torch.cuda.is_available())
     
     annoy_index= AnnoyIndex(1024, 'angular')  
 
     if config['retrieval_type']=='txt2img':   
-        annoy_index.load("./annoy_indices/text.ann'")
+        annoy_index.load("./annoy_indices/text.ann")
     elif config['retrieval_type']=='img2txt': 
-        annoy_index.load("./annoy_indices/image.ann'")
+        annoy_index.load("./annoy_indices/image.ann")
     else:
-        annoy_index.load("./annoy_indices/common.ann'")
+        annoy_index.load("./annoy_indices/common.ann")
 
-    retreival_indexes=get_retrievals(retreival_loader,test_df_eval,annoy_index)
+    retreival_indexes=get_retrievals(retreival_loader,retreival_df,annoy_index)
 
 
 
