@@ -18,7 +18,7 @@ from torch.utils.data import DataLoader
 
 
 
-def train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,my_lr_scheduler=None):
+def train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,wandb,my_lr_scheduler=None):
     batch_time = AverageMeter('Time', ':6.3f')
     data_time = AverageMeter('Data', ':6.3f')
 
@@ -44,8 +44,6 @@ def train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoc
     corrnet_model.train() 
     end = time.time()
 
-    if my_lr_scheduler!=None:
-        my_lr_scheduler.step()
     for batch,(image,text_emb,instance_labels) in enumerate(trainLoader):
         # zero the parameter gradients
         optimizer.zero_grad()
@@ -80,13 +78,21 @@ def train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoc
         batch_time.update(time.time() - end)
         end = time.time()
 
+        wandb.log({"Train loss":loss_train.avg})
+        wandb.log({"img2img":img2img.avg})
+        wandb.log({"txt2txt":txt2txt.avg})
+        wandb.log({"img2txt":img2txt.avg})
+        
         if batch % print_freq == 0:
             progress_of_batch.display(batch)
+
+    if my_lr_scheduler!=None:
+        my_lr_scheduler.step()        
 
     return corrnet_model,resnet_model        
 
 
-def test_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq):
+def test_epoch(corrnet_model,testLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,wandb):
 
     corrnet_model.eval()
     resnet_model.eval()
@@ -142,5 +148,19 @@ def test_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch
 
             if batch % print_freq == 0: 
                 progress_of_test_batch.display(batch)
+
+            wandb.log({"Test loss":loss_test.avg})
+            wandb.log({"img2img":img2img.avg})
+            wandb.log({"txt2txt":txt2txt.avg})
+            wandb.log({"img2txt":img2txt.avg})    
+
+            wandb.log({"val_r1_acc_txt2img":val_r1_acc_txt2img.avg})
+            wandb.log({"val_r5_acc_txt2img":val_r5_acc_txt2img.avg})
+            wandb.log({"val_r10_acc_txt2img":val_r10_acc_txt2img.avg})
+
+
+            wandb.log({"val_r1_acc_img2txt":val_r1_acc_img2txt.avg})
+            wandb.log({"val_r5_acc_img2txt":val_r5_acc_img2txt.avg})
+            wandb.log({"val_r10_acc_img2txt":val_r10_acc_img2txt.avg})
 
     return val_r5_acc_img2txt,val_r5_acc_txt2img

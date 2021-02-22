@@ -9,6 +9,7 @@ git clone https://github.com/facebookresearch/fastText.git
 pip install ./fastText
 pip install annoy
 pip install -U deep_translator
+pip install --upgrade wandb
 cp $1 .
 
 echo "Depencies installed"

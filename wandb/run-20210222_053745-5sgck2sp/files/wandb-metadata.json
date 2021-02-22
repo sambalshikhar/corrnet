@@ -1,0 +1,24 @@
+{
+    "os": "Linux-4.19.112+-x86_64-with-Ubuntu-18.04-bionic",
+    "python": "3.6.9",
+    "heartbeatAt": "2021-02-22T05:37:48.010068",
+    "startedAt": "2021-02-22T05:37:45.080881",
+    "docker": null,
+    "gpu": "Tesla P100-PCIE-16GB",
+    "gpu_count": 1,
+    "cpu_count": 4,
+    "cuda": "10.1.243",
+    "args": [],
+    "state": "running",
+    "codePath": "trainer.py",
+    "program": "trainer.py",
+    "git": {
+        "remote": "https://github.com/sambalshikhar/corrnet.git",
+        "commit": "000cadc29aa6ced4f1581ce597fed96296a2ca8d"
+    },
+    "email": null,
+    "root": "/content/corrnet",
+    "host": "2cd024ff9726",
+    "username": "root",
+    "executable": "/usr/bin/python3"
+}

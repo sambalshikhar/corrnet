@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "trainer.py", line 117, in <module>
+    corrnet_model,resnet_model=train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,my_lr_scheduler,wandb)
+  File "/content/corrnet/trainers/__init__.py", line 48, in train_epoch
+    my_lr_scheduler.step()
+AttributeError: module 'wandb' has no attribute 'step'

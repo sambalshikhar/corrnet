@@ -1,0 +1,8 @@
+/usr/local/lib/python3.6/dist-packages/torch/optim/lr_scheduler.py:136: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  "https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate", UserWarning)
+Traceback (most recent call last):
+  File "trainer.py", line 118, in <module>
+    corrnet_model,resnet_model=train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,wandb,my_lr_scheduler)
+  File "/content/corrnet/trainers/__init__.py", line 85, in train_epoch
+    wanb.log({"txt2txt":txt2txt.avg})
+NameError: name 'wanb' is not defined

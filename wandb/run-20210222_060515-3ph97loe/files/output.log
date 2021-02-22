@@ -1,0 +1,26 @@
+wandb: WARNING Calling run.save without any arguments is deprecated.Changes to attributes are automatically persisted.
+Epoch: [0] , Batch: [0][  0/337]	Time  0.721 ( 0.721)	Data  0.535 ( 0.535)	clip_loss   4.60 (  4.60)	img2img   0.04 (  0.04)	txt2txt   0.03 (  0.03)	img2txt   0.70 (  0.70)
+Epoch: [0] , Batch: [50][ 50/337]	Time  0.622 ( 0.632)	Data  0.457 ( 0.467)	clip_loss   3.89 (  4.03)	img2img  -0.01 ( -0.01)	txt2txt   0.03 (  0.04)	img2txt   0.84 (  0.73)
+Epoch: [0] , Batch: [100][100/337]	Time  0.607 ( 0.627)	Data  0.443 ( 0.462)	clip_loss   3.86 (  3.96)	img2img  -0.01 ( -0.01)	txt2txt   0.03 (  0.04)	img2txt   0.85 (  0.78)
+Traceback (most recent call last):
+  File "trainer.py", line 124, in <module>
+    corrnet_model,resnet_model=train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,wandb,)
+  File "/content/corrnet/trainers/__init__.py", line 47, in train_epoch
+    for batch,(image,text_emb,instance_labels) in enumerate(trainLoader):
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/dataloader.py", line 435, in __next__
+    data = self._next_data()
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/dataloader.py", line 475, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/_utils/fetch.py", line 44, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/_utils/fetch.py", line 44, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/content/corrnet/dataloaders/loaders.py", line 23, in __getitem__
+    img_emb = self.transforms(np.array(self.image_array[str(obj['_id'])]))
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "/usr/local/lib/python3.6/dist-packages/h5py/_hl/dataset.py", line 772, in __array__
+    self.read_direct(arr)
+  File "/usr/local/lib/python3.6/dist-packages/h5py/_hl/dataset.py", line 733, in read_direct
+    self.id.read(mspace, fspace, dest, dxpl=self._dxpl)
+KeyboardInterrupt

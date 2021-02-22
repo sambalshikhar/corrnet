@@ -1,0 +1,31 @@
+Epoch: [0] , Batch: [0][  0/337]	Time  0.740 ( 0.740)	Data  0.552 ( 0.552)	clip_loss   3.85 (  3.85)	img2img  -0.00 ( -0.00)	txt2txt   0.03 (  0.03)	img2txt   0.86 (  0.86)
+Epoch: [0] , Batch: [50][ 50/337]	Time  0.653 ( 0.632)	Data  0.488 ( 0.466)	clip_loss   3.80 (  3.84)	img2img  -0.00 ( -0.00)	txt2txt   0.03 (  0.03)	img2txt   0.90 (  0.86)
+Epoch: [0] , Batch: [100][100/337]	Time  0.621 ( 0.630)	Data  0.455 ( 0.464)	clip_loss   3.84 (  3.84)	img2img  -0.00 (  0.00)	txt2txt   0.03 (  0.03)	img2txt   0.86 (  0.87)
+Epoch: [0] , Batch: [150][150/337]	Time  0.643 ( 0.633)	Data  0.478 ( 0.468)	clip_loss   3.83 (  3.84)	img2img  -0.00 ( -0.00)	txt2txt   0.03 (  0.03)	img2txt   0.88 (  0.87)
+Epoch: [0] , Batch: [200][200/337]	Time  0.612 ( 0.631)	Data  0.449 ( 0.466)	clip_loss   3.85 (  3.84)	img2img   0.00 ( -0.00)	txt2txt   0.04 (  0.03)	img2txt   0.85 (  0.87)
+Epoch: [0] , Batch: [250][250/337]	Time  0.617 ( 0.630)	Data  0.452 ( 0.465)	clip_loss   3.81 (  3.83)	img2img  -0.00 ( -0.00)	txt2txt   0.03 (  0.03)	img2txt   0.88 (  0.87)
+Epoch: [0] , Batch: [300][300/337]	Time  0.615 ( 0.628)	Data  0.451 ( 0.463)	clip_loss   3.81 (  3.83)	img2img  -0.00 ( -0.00)	txt2txt   0.03 (  0.03)	img2txt   0.90 (  0.87)
+Traceback (most recent call last):
+  File "trainer.py", line 118, in <module>
+    corrnet_model,resnet_model=train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,wandb,)
+  File "/content/corrnet/trainers/__init__.py", line 47, in train_epoch
+    for batch,(image,text_emb,instance_labels) in enumerate(trainLoader):
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/dataloader.py", line 435, in __next__
+    data = self._next_data()
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/dataloader.py", line 475, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/_utils/fetch.py", line 44, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/_utils/fetch.py", line 44, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/content/corrnet/dataloaders/loaders.py", line 23, in __getitem__
+    img_emb = self.transforms(np.array(self.image_array[str(obj['_id'])]))
+  File "/usr/local/lib/python3.6/dist-packages/torchvision/transforms/transforms.py", line 67, in __call__
+    img = t(img)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/torchvision/transforms/transforms.py", line 226, in forward
+    return F.normalize(tensor, self.mean, self.std, self.inplace)
+  File "/usr/local/lib/python3.6/dist-packages/torchvision/transforms/functional.py", line 273, in normalize
+    tensor = tensor.clone()
+KeyboardInterrupt

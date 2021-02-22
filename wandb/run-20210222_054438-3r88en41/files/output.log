@@ -1,0 +1,24 @@
+wandb: WARNING Calling run.save without any arguments is deprecated.Changes to attributes are automatically persisted.
+Epoch: [0] , Batch: [0][  0/337]	Time  0.719 ( 0.719)	Data  0.534 ( 0.534)	clip_loss   3.82 (  3.82)	img2img  -0.00 ( -0.00)	txt2txt   0.02 (  0.02)	img2txt   0.88 (  0.88)
+Traceback (most recent call last):
+  File "trainer.py", line 122, in <module>
+    corrnet_model,resnet_model=train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,wandb,)
+  File "/content/corrnet/trainers/__init__.py", line 47, in train_epoch
+    for batch,(image,text_emb,instance_labels) in enumerate(trainLoader):
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/dataloader.py", line 435, in __next__
+    data = self._next_data()
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/dataloader.py", line 475, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/_utils/fetch.py", line 44, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/_utils/fetch.py", line 44, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/content/corrnet/dataloaders/loaders.py", line 23, in __getitem__
+    img_emb = self.transforms(np.array(self.image_array[str(obj['_id'])]))
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "/usr/local/lib/python3.6/dist-packages/h5py/_hl/dataset.py", line 772, in __array__
+    self.read_direct(arr)
+  File "/usr/local/lib/python3.6/dist-packages/h5py/_hl/dataset.py", line 733, in read_direct
+    self.id.read(mspace, fspace, dest, dxpl=self._dxpl)
+KeyboardInterrupt

@@ -14,7 +14,6 @@ config={
 'n_epochs':200,
 'print_freq':50,
 "loss_function":"clip",
-"fasttext_path":"cc.en.300.bin",
 "optimizer":"adam",
 "scheduler":False,
 
@@ -22,9 +21,15 @@ config={
 "source_dir":"/content/nfs/machine-learning/myntra_dataset/",
 "train_csv_path":"/content/nfs/machine-learning/myntra_dataset/train.csv",
 "test_csv_path":"/content/nfs/machine-learning/myntra_dataset/test.csv",
+"fasttext_path":"cc.en.300.bin",
 "model_name":"clip_demo.pth",
 "hdf5_exists":True,
-"load_pretrained":True,
-'retrieval_type':"txt2img",
+"load_pretrained":False,
 "evaluate_n_results":10,
+
+#wandb setup
+"experiment_name":"clip_training_1",
+"project_name":"clip-training",
+"username":"sambal_123",
+"API_KEY":"e18504279798c1429b9fc418d5cbf98056aa8da4"
 }

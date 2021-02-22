@@ -7,6 +7,7 @@ from trainers import *
 from trainers.losses import *
 
 from config import config
+import wandb
 
 import numpy as np
 import pandas as pd
@@ -20,6 +21,8 @@ import torch.utils.data
 from torchvision.models import resnet50
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
+
+
 
 def load_existing_data(source):
     copy_files_h5 = glob(source+"*.h5")
@@ -109,12 +112,19 @@ if __name__ == '__main__':
     best_test_img2img,best_test_txt2txt,best_test_img2txt = 0,0,0
     val_r5_acc_img2txt_best,val_r5_acc_txt2img_best=0,0  
 
+    #wandb stuff
+    
+    wandb.init(project=config['project_name'],entity=config['username'])
+    wandb.run.name = config['experiment_name']
+    wandb.run.save()
+    wandb.watch(corrnet_model)
 
+    #training loop
     for epoch in range(0, n_epochs + 1):
-        corrnet_model,resnet_model=train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,my_lr_scheduler )
-        val_r5_acc_img2txt,val_r5_acc_txt2img=test_epoch(corrnet_model,testLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq)
+        corrnet_model,resnet_model=train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,wandb,)
+        val_r5_acc_img2txt,val_r5_acc_txt2img=test_epoch(corrnet_model,testLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,wandb)
 
-        if val_r5_acc_img2txt.avg>val_r5_acc_img2txt_best and val_r5_acc_txt2img.avg>val_r5_acc_txt2img_best:
+        if val_r5_acc_img2txt.avg>=val_r5_acc_img2txt_best or val_r5_acc_txt2img.avg>=val_r5_acc_txt2img_best:
             val_r5_acc_img2txt_best,val_r5_acc_txt2img_best=val_r5_acc_img2txt.avg,val_r5_acc_txt2img.avg
             if not os.path.isdir(train_config['source_dir']):
                 os.mkdir(config['source_dir'])

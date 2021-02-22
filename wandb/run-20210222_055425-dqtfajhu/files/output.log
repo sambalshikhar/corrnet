@@ -1,0 +1,33 @@
+wandb: WARNING Calling run.save without any arguments is deprecated.Changes to attributes are automatically persisted.
+Epoch: [0] , Batch: [0][  0/337]	Time  0.708 ( 0.708)	Data  0.520 ( 0.520)	clip_loss   3.83 (  3.83)	img2img   0.00 (  0.00)	txt2txt   0.03 (  0.03)	img2txt   0.88 (  0.88)
+Epoch: [0] , Batch: [50][ 50/337]	Time  0.619 ( 0.627)	Data  0.453 ( 0.461)	clip_loss   3.85 (  3.85)	img2img   0.00 (  0.00)	txt2txt   0.03 (  0.03)	img2txt   0.86 (  0.86)
+Traceback (most recent call last):
+  File "trainer.py", line 124, in <module>
+    corrnet_model,resnet_model=train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,wandb,)
+  File "/content/corrnet/trainers/__init__.py", line 47, in train_epoch
+    for batch,(image,text_emb,instance_labels) in enumerate(trainLoader):
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/dataloader.py", line 435, in __next__
+    data = self._next_data()
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/dataloader.py", line 475, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/_utils/fetch.py", line 44, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/_utils/fetch.py", line 44, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/content/corrnet/dataloaders/loaders.py", line 23, in __getitem__
+    img_emb = self.transforms(np.array(self.image_array[str(obj['_id'])]))
+  File "/usr/local/lib/python3.6/dist-packages/torchvision/transforms/transforms.py", line 67, in __call__
+    img = t(img)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/torchvision/transforms/transforms.py", line 824, in forward
+    return F.resized_crop(img, i, j, h, w, self.size, self.interpolation)
+  File "/usr/local/lib/python3.6/dist-packages/torchvision/transforms/functional.py", line 441, in resized_crop
+    img = resize(img, size, interpolation)
+  File "/usr/local/lib/python3.6/dist-packages/torchvision/transforms/functional.py", line 310, in resize
+    return F_pil.resize(img, size=size, interpolation=interpolation)
+  File "/usr/local/lib/python3.6/dist-packages/torchvision/transforms/functional_pil.py", line 429, in resize
+    return img.resize(size[::-1], interpolation)
+  File "/usr/local/lib/python3.6/dist-packages/PIL/Image.py", line 1873, in resize
+    return self._new(self.im.resize(size, resample, box))
+KeyboardInterrupt
