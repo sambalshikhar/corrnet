@@ -3,3 +3,4 @@ fastText
 myntra_testing.h5
 myntra_training.h5
 annoy_indices
+wandb

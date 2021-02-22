@@ -13,6 +13,8 @@ from annoy import AnnoyIndex
 import os
 import matplotlib.pyplot as plt
 import argparse
+from tqdm.notebook import tqdm
+import numpy as np
 
 
 def create_emb_pool(corrnet_model,resnet_model,testLoader):
@@ -46,7 +48,7 @@ def create_emb_pool(corrnet_model,resnet_model,testLoader):
 
     return common_emb_pool,only_image_emb_pool,only_text_emb_pool
 
-def get_retrievals(loader,df,annoy_index,corrnet_model,resnet_model,retrieval_type):
+def get_retrievals(loader,df,annoy_index,corrnet_model,resnet_model,df_test,testing_image_array,retrieval_type):
         text = df.combined_name_and_breadcrumbs.values
         id = df._id.values
 
