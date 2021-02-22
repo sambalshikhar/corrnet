@@ -1,0 +1,14 @@
+wandb: WARNING Calling run.save without any arguments is deprecated.Changes to attributes are automatically persisted.
+Epoch: [0] , Batch: [0][  0/337]	Time  0.732 ( 0.732)	Data  0.543 ( 0.543)	clip_loss   4.60 (  4.60)	img2img   0.00 (  0.00)	txt2txt   0.02 (  0.02)	img2txt   0.68 (  0.68)
+Epoch: [0] , Batch: [50][ 50/337]	Time  0.639 ( 0.635)	Data  0.475 ( 0.470)	clip_loss   3.90 (  4.03)	img2img   0.01 (  0.01)	txt2txt  -0.00 (  0.00)	img2txt   0.83 (  0.73)
+Epoch: [0] , Batch: [100][100/337]	Time  0.624 ( 0.632)	Data  0.460 ( 0.468)	clip_loss   3.87 (  3.96)	img2img   0.01 (  0.01)	txt2txt   0.01 (  0.00)	img2txt   0.86 (  0.78)
+Epoch: [0] , Batch: [150][150/337]	Time  0.631 ( 0.631)	Data  0.467 ( 0.467)	clip_loss   3.87 (  3.93)	img2img   0.01 (  0.01)	txt2txt   0.00 (  0.00)	img2txt   0.86 (  0.81)
+Epoch: [0] , Batch: [200][200/337]	Time  0.635 ( 0.629)	Data  0.471 ( 0.465)	clip_loss   3.86 (  3.91)	img2img   0.01 (  0.01)	txt2txt  -0.00 (  0.00)	img2txt   0.86 (  0.82)
+Epoch: [0] , Batch: [250][250/337]	Time  0.608 ( 0.628)	Data  0.444 ( 0.464)	clip_loss   3.83 (  3.90)	img2img   0.01 (  0.01)	txt2txt   0.00 (  0.00)	img2txt   0.88 (  0.83)
+Epoch: [0] , Batch: [300][300/337]	Time  0.644 ( 0.626)	Data  0.479 ( 0.462)	clip_loss   3.85 (  3.89)	img2img   0.01 (  0.01)	txt2txt   0.00 (  0.00)	img2txt   0.87 (  0.83)
+Traceback (most recent call last):
+  File "trainer.py", line 125, in <module>
+    val_r5_acc_img2txt,val_r5_acc_txt2img=test_epoch(corrnet_model,testLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,wandb)
+  File "/content/corrnet/trainers/__init__.py", line 104, in test_epoch
+    [loss_test,test_img2img,test_txt2txt,test_img2txt,val_r1_acc_txt2img,val_r5_acc_txt2img,val_r10_acc_txt2img,val_r1_acc_img2txt,val_r5_acc_img2txt,val_r10_acc_img2txt],
+NameError: name 'loss_test' is not defined

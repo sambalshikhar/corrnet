@@ -23,23 +23,10 @@ def train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoc
     data_time = AverageMeter('Data', ':6.3f')
 
     loss_train = AverageMeter('clip_loss', ':6.2f')
-    loss_test = AverageMeter('clip_loss', ':6.2f')
 
     img2img = AverageMeter('img2img', ':6.2f')
     txt2txt = AverageMeter('txt2txt', ':6.2f')
     img2txt = AverageMeter('img2txt', ':6.2f')
-
-    test_img2img = AverageMeter('test_img2img', ':6.2f')
-    test_txt2txt = AverageMeter('test_txt2txt', ':6.2f')
-    test_img2txt = AverageMeter('test_img2txt', ':6.2f')
-
-    val_r1_acc_txt2img = AverageMeter('val_r@1_txt2img', ':6.2f')
-    val_r5_acc_txt2img = AverageMeter('val_r@5_txt2img', ':6.2f')
-    val_r10_acc_txt2img = AverageMeter('val_r@10_txt2img', ':6.2f')
-
-    val_r1_acc_img2txt = AverageMeter('val_r@1_img2txt', ':6.2f')
-    val_r5_acc_img2txt = AverageMeter('val_r@5_img2txt', ':6.2f')
-    val_r10_acc_img2txt = AverageMeter('val_r@10_img2txt', ':6.2f')
 
     corrnet_model.train() 
     end = time.time()
@@ -94,6 +81,20 @@ def train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoc
 
 def test_epoch(corrnet_model,testLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,wandb):
 
+    val_r1_acc_txt2img = AverageMeter('val_r@1_txt2img', ':6.2f')
+    val_r5_acc_txt2img = AverageMeter('val_r@5_txt2img', ':6.2f')
+    val_r10_acc_txt2img = AverageMeter('val_r@10_txt2img', ':6.2f')
+
+    val_r1_acc_img2txt = AverageMeter('val_r@1_img2txt', ':6.2f')
+    val_r5_acc_img2txt = AverageMeter('val_r@5_img2txt', ':6.2f')
+    val_r10_acc_img2txt = AverageMeter('val_r@10_img2txt', ':6.2f')
+
+    test_img2img = AverageMeter('test_img2img', ':6.2f')
+    test_txt2txt = AverageMeter('test_txt2txt', ':6.2f')
+    test_img2txt = AverageMeter('test_img2txt', ':6.2f')
+
+    loss_test = AverageMeter('clip_loss', ':6.2f')
+
     corrnet_model.eval()
     resnet_model.eval()
     with torch.no_grad():
@@ -103,7 +104,6 @@ def test_epoch(corrnet_model,testLoader,resnet_model,cosine_sim,optimizer,epoch,
             len(testLoader),    
             [loss_test,test_img2img,test_txt2txt,test_img2txt,val_r1_acc_txt2img,val_r5_acc_txt2img,val_r10_acc_txt2img,val_r1_acc_img2txt,val_r5_acc_img2txt,val_r10_acc_img2txt],
             prefix="Epoch: [{}] , Batch: [{}]".format(epoch,batch))
-            data_time.update(time.time() - end)
             instance_labels = torch.squeeze(instance_labels,dim=0)
             if torch.cuda.is_available:
                 image,text_emb,instance_labels = image.cuda(),text_emb.cuda(),instance_labels.cuda()
@@ -150,9 +150,9 @@ def test_epoch(corrnet_model,testLoader,resnet_model,cosine_sim,optimizer,epoch,
                 progress_of_test_batch.display(batch)
 
             wandb.log({"Test loss":loss_test.avg})
-            wandb.log({"img2img":img2img.avg})
-            wandb.log({"txt2txt":txt2txt.avg})
-            wandb.log({"img2txt":img2txt.avg})    
+            wandb.log({"img2img":test_img2img.avg})
+            wandb.log({"txt2txt":test_txt2txt.avg})
+            wandb.log({"img2txt":test_img2txt.avg})    
 
             wandb.log({"val_r1_acc_txt2img":val_r1_acc_txt2img.avg})
             wandb.log({"val_r5_acc_txt2img":val_r5_acc_txt2img.avg})

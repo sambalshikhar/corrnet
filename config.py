@@ -22,7 +22,7 @@ config={
 "train_csv_path":"/content/nfs/machine-learning/myntra_dataset/train.csv",
 "test_csv_path":"/content/nfs/machine-learning/myntra_dataset/test.csv",
 "fasttext_path":"cc.en.300.bin",
-"model_name":"clip_demo.pth",
+"model_name":"clip_demo_2.pth",
 "hdf5_exists":True,
 "load_pretrained":False,
 "evaluate_n_results":10,
@@ -32,4 +32,5 @@ config={
 "project_name":"clip-training",
 "username":"sambal_123",
 "API_KEY":"e18504279798c1429b9fc418d5cbf98056aa8da4"
+
 }

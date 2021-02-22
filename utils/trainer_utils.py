@@ -2,6 +2,7 @@
 import numpy as np
 import time
 import math
+from scipy.spatial.distance import cdist
 
 class AverageMeter(object):
     """Computes and stores the average and current value"""

@@ -47,7 +47,15 @@ class create_hdf5():
                     compression="gzip",
                     compression_opts=9)
 
-        return self.invalid_images            
+        return self.invalid_images   
+
+if __name__ == '__main__':
+
+    hdf5_ob=create_hdf5()
+    train_invalid=hdf5_ob.write_images_into_HDF5(df_train['media_path'],config['train_hdf5_name'])
+    test_invalid=hdf5_ob.write_images_into_HDF5(df_test['media_path'],config['test_hdf5_name'])
+
+
         
                     
 

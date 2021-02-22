@@ -1,0 +1,72 @@
+wandb: WARNING Calling run.save without any arguments is deprecated.Changes to attributes are automatically persisted.
+Epoch: [0] , Batch: [0][  0/337]	Time  0.747 ( 0.747)	Data  0.558 ( 0.558)	clip_loss   4.61 (  4.61)	img2img  -0.02 ( -0.02)	txt2txt   0.01 (  0.01)	img2txt   0.70 (  0.70)
+Epoch: [0] , Batch: [50][ 50/337]	Time  0.615 ( 0.610)	Data  0.451 ( 0.445)	clip_loss   3.91 (  4.03)	img2img  -0.01 ( -0.01)	txt2txt   0.04 (  0.04)	img2txt   0.81 (  0.74)
+Epoch: [0] , Batch: [100][100/337]	Time  0.606 ( 0.607)	Data  0.441 ( 0.442)	clip_loss   3.87 (  3.96)	img2img  -0.01 ( -0.01)	txt2txt   0.04 (  0.05)	img2txt   0.85 (  0.79)
+Epoch: [0] , Batch: [150][150/337]	Time  0.609 ( 0.608)	Data  0.444 ( 0.443)	clip_loss   3.83 (  3.93)	img2img  -0.01 ( -0.01)	txt2txt   0.05 (  0.05)	img2txt   0.88 (  0.81)
+Epoch: [0] , Batch: [200][200/337]	Time  0.607 ( 0.608)	Data  0.442 ( 0.443)	clip_loss   3.87 (  3.91)	img2img  -0.01 ( -0.01)	txt2txt   0.05 (  0.05)	img2txt   0.83 (  0.82)
+Epoch: [0] , Batch: [250][250/337]	Time  0.606 ( 0.608)	Data  0.441 ( 0.443)	clip_loss   3.85 (  3.90)	img2img  -0.01 ( -0.01)	txt2txt   0.05 (  0.05)	img2txt   0.85 (  0.83)
+Epoch: [0] , Batch: [300][300/337]	Time  0.617 ( 0.608)	Data  0.452 ( 0.443)	clip_loss   3.82 (  3.89)	img2img  -0.01 ( -0.01)	txt2txt   0.04 (  0.05)	img2txt   0.88 (  0.83)
+Epoch: [0] , Batch: [0][ 0/85]	clip_loss   3.81 (  3.81)	test_img2img  -0.01 ( -0.01)	test_txt2txt   0.05 (  0.05)	test_img2txt   0.90 (  0.90)	val_r@1_txt2img   0.35 (  0.35)	val_r@5_txt2img   0.79 (  0.79)	val_r@10_txt2img   0.96 (  0.96)	val_r@1_img2txt   0.29 (  0.29)	val_r@5_img2txt   0.83 (  0.83)	val_r@10_img2txt   0.94 (  0.94)
+Epoch: [0] , Batch: [50][50/85]	clip_loss   3.81 (  3.82)	test_img2img  -0.01 ( -0.01)	test_txt2txt   0.04 (  0.05)	test_img2txt   0.90 (  0.90)	val_r@1_txt2img   0.30 (  0.29)	val_r@5_txt2img   0.87 (  0.80)	val_r@10_txt2img   0.96 (  0.93)	val_r@1_img2txt   0.33 (  0.30)	val_r@5_img2txt   0.85 (  0.81)	val_r@10_img2txt   0.95 (  0.94)
+YIPPEEE MODEL SAVED
+0 , 0 , 0
+Epoch: [1] , Batch: [0][  0/337]	Time  0.618 ( 0.618)	Data  0.453 ( 0.453)	clip_loss   3.83 (  3.83)	img2img  -0.00 ( -0.00)	txt2txt   0.05 (  0.05)	img2txt   0.89 (  0.89)
+Epoch: [1] , Batch: [50][ 50/337]	Time  0.592 ( 0.598)	Data  0.437 ( 0.443)	clip_loss   3.84 (  3.84)	img2img  -0.01 ( -0.01)	txt2txt   0.04 (  0.04)	img2txt   0.87 (  0.87)
+Epoch: [1] , Batch: [100][100/337]	Time  0.591 ( 0.596)	Data  0.437 ( 0.442)	clip_loss   3.83 (  3.84)	img2img  -0.01 ( -0.01)	txt2txt   0.04 (  0.04)	img2txt   0.88 (  0.87)
+Epoch: [1] , Batch: [150][150/337]	Time  0.586 ( 0.595)	Data  0.433 ( 0.441)	clip_loss   3.85 (  3.84)	img2img  -0.01 ( -0.01)	txt2txt   0.05 (  0.04)	img2txt   0.87 (  0.87)
+Epoch: [1] , Batch: [200][200/337]	Time  0.586 ( 0.596)	Data  0.432 ( 0.442)	clip_loss   3.84 (  3.84)	img2img  -0.00 ( -0.01)	txt2txt   0.05 (  0.04)	img2txt   0.88 (  0.87)
+Epoch: [1] , Batch: [250][250/337]	Time  0.586 ( 0.595)	Data  0.432 ( 0.441)	clip_loss   3.84 (  3.84)	img2img  -0.01 ( -0.01)	txt2txt   0.04 (  0.04)	img2txt   0.88 (  0.87)
+Epoch: [1] , Batch: [300][300/337]	Time  0.615 ( 0.595)	Data  0.461 ( 0.441)	clip_loss   3.82 (  3.84)	img2img  -0.01 ( -0.01)	txt2txt   0.04 (  0.04)	img2txt   0.88 (  0.87)
+Epoch: [1] , Batch: [0][ 0/85]	clip_loss   3.80 (  3.80)	test_img2img  -0.01 ( -0.01)	test_txt2txt   0.05 (  0.05)	test_img2txt   0.91 (  0.91)	val_r@1_txt2img   0.34 (  0.34)	val_r@5_txt2img   0.79 (  0.79)	val_r@10_txt2img   0.97 (  0.97)	val_r@1_img2txt   0.26 (  0.26)	val_r@5_img2txt   0.86 (  0.86)	val_r@10_img2txt   0.94 (  0.94)
+Epoch: [1] , Batch: [50][50/85]	clip_loss   3.80 (  3.81)	test_img2img  -0.01 ( -0.01)	test_txt2txt   0.04 (  0.05)	test_img2txt   0.90 (  0.90)	val_r@1_txt2img   0.23 (  0.28)	val_r@5_txt2img   0.84 (  0.81)	val_r@10_txt2img   0.94 (  0.94)	val_r@1_img2txt   0.28 (  0.30)	val_r@5_img2txt   0.85 (  0.82)	val_r@10_img2txt   0.95 (  0.94)
+YIPPEEE MODEL SAVED
+0 , 0 , 0
+Epoch: [2] , Batch: [0][  0/337]	Time  0.612 ( 0.612)	Data  0.447 ( 0.447)	clip_loss   3.82 (  3.82)	img2img  -0.01 ( -0.01)	txt2txt   0.04 (  0.04)	img2txt   0.88 (  0.88)
+Epoch: [2] , Batch: [50][ 50/337]	Time  0.596 ( 0.600)	Data  0.442 ( 0.445)	clip_loss   3.82 (  3.84)	img2img  -0.01 ( -0.01)	txt2txt   0.05 (  0.04)	img2txt   0.88 (  0.88)
+Epoch: [2] , Batch: [100][100/337]	Time  0.607 ( 0.601)	Data  0.452 ( 0.447)	clip_loss   3.81 (  3.83)	img2img  -0.01 ( -0.01)	txt2txt   0.05 (  0.04)	img2txt   0.90 (  0.88)
+Epoch: [2] , Batch: [150][150/337]	Time  0.606 ( 0.604)	Data  0.453 ( 0.450)	clip_loss   3.84 (  3.83)	img2img  -0.00 ( -0.01)	txt2txt   0.05 (  0.04)	img2txt   0.87 (  0.88)
+Epoch: [2] , Batch: [200][200/337]	Time  0.606 ( 0.605)	Data  0.452 ( 0.450)	clip_loss   3.80 (  3.83)	img2img  -0.01 ( -0.01)	txt2txt   0.03 (  0.04)	img2txt   0.91 (  0.88)
+Epoch: [2] , Batch: [250][250/337]	Time  0.594 ( 0.604)	Data  0.440 ( 0.450)	clip_loss   3.89 (  3.83)	img2img  -0.00 ( -0.01)	txt2txt   0.04 (  0.04)	img2txt   0.84 (  0.88)
+Epoch: [2] , Batch: [300][300/337]	Time  0.605 ( 0.603)	Data  0.452 ( 0.449)	clip_loss   3.84 (  3.83)	img2img  -0.01 ( -0.01)	txt2txt   0.03 (  0.04)	img2txt   0.88 (  0.88)
+Epoch: [2] , Batch: [0][ 0/85]	clip_loss   3.80 (  3.80)	test_img2img  -0.01 ( -0.01)	test_txt2txt   0.05 (  0.05)	test_img2txt   0.91 (  0.91)	val_r@1_txt2img   0.35 (  0.35)	val_r@5_txt2img   0.84 (  0.84)	val_r@10_txt2img   0.97 (  0.97)	val_r@1_img2txt   0.33 (  0.33)	val_r@5_img2txt   0.86 (  0.86)	val_r@10_img2txt   0.95 (  0.95)
+Epoch: [2] , Batch: [50][50/85]	clip_loss   3.79 (  3.80)	test_img2img  -0.01 ( -0.01)	test_txt2txt   0.03 (  0.04)	test_img2txt   0.91 (  0.91)	val_r@1_txt2img   0.30 (  0.31)	val_r@5_txt2img   0.86 (  0.82)	val_r@10_txt2img   0.95 (  0.95)	val_r@1_img2txt   0.34 (  0.32)	val_r@5_img2txt   0.87 (  0.83)	val_r@10_img2txt   0.96 (  0.95)
+YIPPEEE MODEL SAVED
+0 , 0 , 0
+Epoch: [3] , Batch: [0][  0/337]	Time  0.615 ( 0.615)	Data  0.450 ( 0.450)	clip_loss   3.80 (  3.80)	img2img  -0.01 ( -0.01)	txt2txt   0.04 (  0.04)	img2txt   0.90 (  0.90)
+Epoch: [3] , Batch: [50][ 50/337]	Time  0.599 ( 0.596)	Data  0.446 ( 0.442)	clip_loss   3.83 (  3.83)	img2img  -0.01 ( -0.01)	txt2txt   0.03 (  0.04)	img2txt   0.88 (  0.88)
+Epoch: [3] , Batch: [100][100/337]	Time  0.606 ( 0.595)	Data  0.452 ( 0.441)	clip_loss   3.83 (  3.83)	img2img  -0.00 ( -0.01)	txt2txt   0.04 (  0.04)	img2txt   0.88 (  0.88)
+Epoch: [3] , Batch: [150][150/337]	Time  0.608 ( 0.597)	Data  0.454 ( 0.443)	clip_loss   3.80 (  3.82)	img2img  -0.01 ( -0.01)	txt2txt   0.05 (  0.04)	img2txt   0.90 (  0.88)
+Epoch: [3] , Batch: [200][200/337]	Time  0.614 ( 0.598)	Data  0.459 ( 0.444)	clip_loss   3.84 (  3.82)	img2img  -0.00 ( -0.01)	txt2txt   0.04 (  0.04)	img2txt   0.87 (  0.88)
+Epoch: [3] , Batch: [250][250/337]	Time  0.603 ( 0.599)	Data  0.449 ( 0.444)	clip_loss   3.81 (  3.82)	img2img  -0.01 ( -0.01)	txt2txt   0.04 (  0.04)	img2txt   0.88 (  0.88)
+Epoch: [3] , Batch: [300][300/337]	Time  0.605 ( 0.599)	Data  0.451 ( 0.445)	clip_loss   3.79 (  3.82)	img2img  -0.00 ( -0.01)	txt2txt   0.04 (  0.04)	img2txt   0.92 (  0.88)
+Epoch: [3] , Batch: [0][ 0/85]	clip_loss   3.80 (  3.80)	test_img2img  -0.01 ( -0.01)	test_txt2txt   0.05 (  0.05)	test_img2txt   0.91 (  0.91)	val_r@1_txt2img   0.31 (  0.31)	val_r@5_txt2img   0.83 (  0.83)	val_r@10_txt2img   0.96 (  0.96)	val_r@1_img2txt   0.31 (  0.31)	val_r@5_img2txt   0.85 (  0.85)	val_r@10_img2txt   0.95 (  0.95)
+Epoch: [3] , Batch: [50][50/85]	clip_loss   3.79 (  3.80)	test_img2img  -0.01 ( -0.00)	test_txt2txt   0.04 (  0.05)	test_img2txt   0.91 (  0.91)	val_r@1_txt2img   0.31 (  0.30)	val_r@5_txt2img   0.86 (  0.82)	val_r@10_txt2img   0.96 (  0.95)	val_r@1_img2txt   0.30 (  0.31)	val_r@5_img2txt   0.86 (  0.83)	val_r@10_img2txt   0.95 (  0.95)
+YIPPEEE MODEL SAVED
+0 , 0 , 0
+Epoch: [4] , Batch: [0][  0/337]	Time  0.580 ( 0.580)	Data  0.426 ( 0.426)	clip_loss   3.84 (  3.84)	img2img   0.00 (  0.00)	txt2txt   0.05 (  0.05)	img2txt   0.88 (  0.88)
+Epoch: [4] , Batch: [50][ 50/337]	Time  0.590 ( 0.594)	Data  0.436 ( 0.440)	clip_loss   3.82 (  3.82)	img2img  -0.01 ( -0.01)	txt2txt   0.05 (  0.04)	img2txt   0.89 (  0.89)
+Epoch: [4] , Batch: [100][100/337]	Time  0.605 ( 0.595)	Data  0.451 ( 0.441)	clip_loss   3.82 (  3.82)	img2img  -0.01 ( -0.01)	txt2txt   0.05 (  0.04)	img2txt   0.88 (  0.89)
+Epoch: [4] , Batch: [150][150/337]	Time  0.592 ( 0.595)	Data  0.439 ( 0.441)	clip_loss   3.84 (  3.82)	img2img  -0.01 ( -0.01)	txt2txt   0.04 (  0.04)	img2txt   0.86 (  0.89)
+Epoch: [4] , Batch: [200][200/337]	Time  0.581 ( 0.593)	Data  0.427 ( 0.440)	clip_loss   3.83 (  3.82)	img2img  -0.01 ( -0.01)	txt2txt   0.04 (  0.04)	img2txt   0.88 (  0.89)
+Traceback (most recent call last):
+  File "trainer.py", line 124, in <module>
+    corrnet_model,resnet_model=train_epoch(corrnet_model,trainLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,wandb,)
+  File "/content/corrnet/trainers/__init__.py", line 34, in train_epoch
+    for batch,(image,text_emb,instance_labels) in enumerate(trainLoader):
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/dataloader.py", line 435, in __next__
+    data = self._next_data()
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/dataloader.py", line 475, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/_utils/fetch.py", line 44, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/_utils/fetch.py", line 44, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/content/corrnet/dataloaders/loaders.py", line 23, in __getitem__
+    img_emb = self.transforms(np.array(self.image_array[str(obj['_id'])]))
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "/usr/local/lib/python3.6/dist-packages/h5py/_hl/dataset.py", line 772, in __array__
+    self.read_direct(arr)
+  File "/usr/local/lib/python3.6/dist-packages/h5py/_hl/dataset.py", line 733, in read_direct
+    self.id.read(mspace, fspace, dest, dxpl=self._dxpl)
+KeyboardInterrupt

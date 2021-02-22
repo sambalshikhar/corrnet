@@ -1,0 +1,14 @@
+wandb: WARNING Calling run.save without any arguments is deprecated.Changes to attributes are automatically persisted.
+Epoch: [0] , Batch: [0][  0/337]	Time  0.819 ( 0.819)	Data  0.635 ( 0.635)	clip_loss   4.60 (  4.60)	img2img  -0.02 ( -0.02)	txt2txt   0.00 (  0.00)	img2txt   0.68 (  0.68)
+Epoch: [0] , Batch: [50][ 50/337]	Time  0.664 ( 0.682)	Data  0.499 ( 0.517)	clip_loss   3.90 (  4.03)	img2img  -0.01 ( -0.01)	txt2txt  -0.02 ( -0.02)	img2txt   0.84 (  0.74)
+Epoch: [0] , Batch: [100][100/337]	Time  0.689 ( 0.679)	Data  0.524 ( 0.513)	clip_loss   3.88 (  3.96)	img2img  -0.01 ( -0.01)	txt2txt  -0.01 ( -0.02)	img2txt   0.84 (  0.79)
+Epoch: [0] , Batch: [150][150/337]	Time  0.701 ( 0.678)	Data  0.536 ( 0.513)	clip_loss   3.89 (  3.93)	img2img  -0.01 ( -0.01)	txt2txt  -0.02 ( -0.02)	img2txt   0.82 (  0.81)
+Epoch: [0] , Batch: [200][200/337]	Time  0.627 ( 0.673)	Data  0.462 ( 0.508)	clip_loss   3.83 (  3.91)	img2img  -0.01 ( -0.01)	txt2txt  -0.02 ( -0.02)	img2txt   0.87 (  0.82)
+Epoch: [0] , Batch: [250][250/337]	Time  0.624 ( 0.667)	Data  0.458 ( 0.502)	clip_loss   3.85 (  3.90)	img2img  -0.01 ( -0.01)	txt2txt  -0.02 ( -0.01)	img2txt   0.86 (  0.83)
+Epoch: [0] , Batch: [300][300/337]	Time  0.617 ( 0.661)	Data  0.452 ( 0.496)	clip_loss   3.84 (  3.89)	img2img  -0.01 ( -0.01)	txt2txt  -0.01 ( -0.01)	img2txt   0.87 (  0.83)
+Epoch: [0] , Batch: [0][ 0/85]	clip_loss   3.81 (  3.81)	test_img2img  -0.01 ( -0.01)	test_txt2txt  -0.01 ( -0.01)	test_img2txt   0.90 (  0.90)	val_r@1_txt2img   0.35 (  0.35)	val_r@5_txt2img   0.78 (  0.78)	val_r@10_txt2img   0.95 (  0.95)	val_r@1_img2txt   0.32 (  0.32)	val_r@5_img2txt   0.81 (  0.81)	val_r@10_img2txt   0.93 (  0.93)
+Epoch: [0] , Batch: [50][50/85]	clip_loss   3.81 (  3.82)	test_img2img  -0.01 ( -0.01)	test_txt2txt  -0.00 ( -0.01)	test_img2txt   0.90 (  0.90)	val_r@1_txt2img   0.21 (  0.28)	val_r@5_txt2img   0.85 (  0.80)	val_r@10_txt2img   0.95 (  0.92)	val_r@1_img2txt   0.34 (  0.31)	val_r@5_img2txt   0.85 (  0.81)	val_r@10_img2txt   0.92 (  0.93)
+Traceback (most recent call last):
+  File "trainer.py", line 129, in <module>
+    if not os.path.isdir(train_config['source_dir']):
+NameError: name 'train_config' is not defined

@@ -113,7 +113,7 @@ if __name__ == '__main__':
     val_r5_acc_img2txt_best,val_r5_acc_txt2img_best=0,0  
 
     #wandb stuff
-    
+
     wandb.init(project=config['project_name'],entity=config['username'])
     wandb.run.name = config['experiment_name']
     wandb.run.save()
@@ -126,7 +126,7 @@ if __name__ == '__main__':
 
         if val_r5_acc_img2txt.avg>=val_r5_acc_img2txt_best or val_r5_acc_txt2img.avg>=val_r5_acc_txt2img_best:
             val_r5_acc_img2txt_best,val_r5_acc_txt2img_best=val_r5_acc_img2txt.avg,val_r5_acc_txt2img.avg
-            if not os.path.isdir(train_config['source_dir']):
+            if not os.path.isdir(config['source_dir']):
                 os.mkdir(config['source_dir'])
             torch.save(corrnet_model.state_dict(),os.path.join(config['source_dir'],config['model_name']))
             print("YIPPEEE MODEL SAVED")

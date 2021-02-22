@@ -1,0 +1,16 @@
+wandb: WARNING Calling run.save without any arguments is deprecated.Changes to attributes are automatically persisted.
+Epoch: [0] , Batch: [0][  0/337]	Time  0.695 ( 0.695)	Data  0.507 ( 0.507)	clip_loss   4.61 (  4.61)	img2img  -0.03 ( -0.03)	txt2txt  -0.00 ( -0.00)	img2txt   0.72 (  0.72)
+Epoch: [0] , Batch: [50][ 50/337]	Time  0.612 ( 0.612)	Data  0.447 ( 0.447)	clip_loss   3.90 (  4.03)	img2img  -0.00 ( -0.01)	txt2txt   0.01 (  0.01)	img2txt   0.84 (  0.74)
+Epoch: [0] , Batch: [100][100/337]	Time  0.601 ( 0.610)	Data  0.437 ( 0.445)	clip_loss   3.88 (  3.96)	img2img  -0.00 ( -0.01)	txt2txt   0.01 (  0.01)	img2txt   0.85 (  0.79)
+Epoch: [0] , Batch: [150][150/337]	Time  0.596 ( 0.611)	Data  0.432 ( 0.446)	clip_loss   3.88 (  3.93)	img2img   0.00 ( -0.01)	txt2txt   0.01 (  0.01)	img2txt   0.86 (  0.81)
+Epoch: [0] , Batch: [200][200/337]	Time  0.601 ( 0.611)	Data  0.436 ( 0.446)	clip_loss   3.83 (  3.91)	img2img  -0.00 ( -0.00)	txt2txt   0.02 (  0.01)	img2txt   0.88 (  0.82)
+Epoch: [0] , Batch: [250][250/337]	Time  0.589 ( 0.610)	Data  0.424 ( 0.445)	clip_loss   3.88 (  3.90)	img2img   0.00 ( -0.00)	txt2txt   0.01 (  0.01)	img2txt   0.83 (  0.83)
+Epoch: [0] , Batch: [300][300/337]	Time  0.612 ( 0.609)	Data  0.447 ( 0.444)	clip_loss   3.83 (  3.89)	img2img  -0.00 ( -0.00)	txt2txt   0.00 (  0.01)	img2txt   0.88 (  0.83)
+Traceback (most recent call last):
+  File "trainer.py", line 125, in <module>
+    val_r5_acc_img2txt,val_r5_acc_txt2img=test_epoch(corrnet_model,testLoader,resnet_model,cosine_sim,optimizer,epoch,print_freq,wandb)
+  File "/content/corrnet/trainers/__init__.py", line 130, in test_epoch
+    img_index=retreival_acc(img_feats,text_feats,instance_labels)
+  File "/content/corrnet/utils/trainer_utils.py", line 32, in retreival_acc
+    distance_matrix = cdist(emb_1,emb_2)
+NameError: name 'cdist' is not defined
